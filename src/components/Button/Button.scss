@@ -1,0 +1,26 @@
+.button{
+    width: 150px;
+    height: 30px;
+    margin: 15px;
+    margin: 15px auto;
+    border: 1px solid rgb(48, 63, 18);
+    border-radius: 3px;
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+
+    &.play{
+        background-color: #5d0d0d;
+        color: #e2d8d8;
+    }
+
+    &.clear{
+        background-color: #5d0d0d;
+        color: #e2d8d8;
+    }
+
+    &.disabled{
+        pointer-events: none;
+        background-color: dimgray;
+    }
+}

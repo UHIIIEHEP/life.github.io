@@ -1,0 +1,16 @@
+.point{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 4px 4px -4px 0px;
+    cursor: pointer;
+    // border: 1px solid black;
+
+    &.dead{
+        background-color: rgb(218, 139, 42);
+    }
+
+    &.life{
+        background-color: rgb(6, 97, 21);
+    }
+}

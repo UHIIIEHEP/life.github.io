@@ -1,0 +1,35 @@
+body{
+    background-color: rgba(235, 144, 224, 0.303);
+}
+.content{    
+    width: 100%;
+    height: 100%;
+    margin: 10px auto;
+    // background-color: azure;
+    // border: 1px solid black;
+    .pole{
+        width: 210px;
+        height: 210px;
+        margin: 55px auto;
+        padding-left: 4px;
+        padding-top: 2px;
+        // background-color: azure;
+        // border: 1px solid black;
+    }
+
+    .hint{
+        height: 30px;
+        text-align: center;
+        font-size: 24px;
+        opacity: 0;
+
+        &.visible{
+            transition: opacity 1.5s;
+            opacity: 1;
+        }
+    }
+
+    &.disabled{
+        pointer-events: none;
+    }
+}
