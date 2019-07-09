@@ -4,7 +4,7 @@ class Button{
     constructor(opt={}){
         this.text = opt.text ? opt.text : "No Text";
         this.class = opt.class ? opt.class : 'button';
-        this.reaction = opt.reaction ? opt.reaction : fun();
+        this.reaction = opt.reaction ? opt.reaction : foo(this.text);
         this.parent = opt.parent;
         this.type = opt.type ? opt.type : 'play';
     }
@@ -14,13 +14,13 @@ class Button{
         const btn = $('<div />', {
             class: `button ${this.type} ${this.class}`,
             text: this.text,
-            click: this.reaction            
-        }).appendTo(this.parent);        
+            click: this.reaction
+        }).appendTo(this.parent);
     }
 }
 
-function fun(){
-    console.log('NO REACTION')
+function foo(text){
+    console.error('NO REACTION from button', text );
 }
 
 export default Button;

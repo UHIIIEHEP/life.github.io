@@ -5,12 +5,7 @@ export function generateScene(size, parent){
     
     const pole = $('<div />', {
         class: 'pole'
-    }).appendTo(parent);    
-
-    // parent.css({
-    //     width: pole.width() + 20,
-    //     height: pole.height() + 150
-    // })
+    }).appendTo(parent);
 
     for(let i = 0; i < size; i++){
         let points = [];

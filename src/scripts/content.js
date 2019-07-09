@@ -4,18 +4,14 @@ import {simulation, clearScene} from './math.js';
 
 (function(){
     const content = $('.content');
-
-
     let size = 15;
 
     generateScene(size, content);
-    // addButton();
 
-    
     $('<div />', {
         class: 'hint'
     }).appendTo(content)
-    
+
     let btnPlay = new Button({
         text: "PLAY",
         parent: content,

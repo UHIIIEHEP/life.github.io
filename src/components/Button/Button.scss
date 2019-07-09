@@ -17,6 +17,7 @@
     &.clear{
         background-color: #5d0d0d;
         color: #e2d8d8;
+        pointer-events: auto;
     }
 
     &.disabled{

@@ -1,27 +1,29 @@
 export function simulation(){
     disableElement('disabled');
     $('.hint').removeClass('visible');
+    document.stopReaction = false;
 
     let size = Math.sqrt(document.getElementsByClassName('point').length);
     let endCikle = 0;
-    var globalArrState = [];
+    var beforResultState = [];
     let repeatStep;
     let promise = new Promise((res, rej)=>{
     let timeTimer = 50;
 
-        (function repeat(){
+        (function repeatFoo(){
             repeatStep = setTimeout(function(){
                 let steps = 60000;
                 let resultState = foo(size);
-                
                 endCikle++;
-                let resultFoo = functionStop(globalArrState, resultState);
-                if(resultFoo || endCikle > steps){
+                let resultFoo = functionStop(beforResultState, resultState);
+                beforResultState = resultState
+                if(resultFoo || endCikle > steps || document.stopReaction){
                     console.log("steps = ", endCikle)
                     if(endCikle >= steps)  {console.log("all steps")};
+                    disableElement('active')
                     res();
                 }else{
-                    return repeat();                    
+                    return repeatFoo();
                 }
             }, timeTimer)
         })()
@@ -115,23 +117,23 @@ function foo(size){
                 if(population == 3){
                     $(arrPoint[  i * size + j ]).attr('class', `point ${$(arrPoint[ i * size + j ]).attr('state')} preLife`)
                 }
-                
+
             }
 
             tempArr.push($(arrPoint[ i * size + j ]).attr('state'))
         }
         newArrPoint.push(tempArr);
-    }      
+    }
     let pointDead = document.getElementsByClassName('preDead');
 
     for(let i = 0; i < pointDead.length; i++){
         pointState($(pointDead[i]), 'dead')
     }
-            
+
     let pointLife = document.getElementsByClassName('preLife');
 
-    for(let i = 0; i < pointLife.length; i++){        
-        pointState($(pointLife[i]), "life");   
+    for(let i = 0; i < pointLife.length; i++){
+        pointState($(pointLife[i]), "life");
     }
     arrPoint = document.getElementsByClassName('point');
     let arrState = [];
@@ -141,25 +143,8 @@ function foo(size){
     return arrState;
 }
 
-function functionStop(globalArrState, resultState){
-    if(globalArrState.length != 0){
-        let flagError = false;
-        for(let i = 0; i < globalArrState.length; i++){
-            let str0 = '';
-            let str1 = ''; 
-            for(let k = 0; k < globalArrState[i].length; k++){
-                str0 += globalArrState[i][k];
-                str1 += resultState[k];
-            }
-            if(str0 == str1){
-                disableElement('enabled')
-                flagError = true
-            }
-        }
-        return flagError;
-    }else{
-        return false;
-    }
+function functionStop(beforResultState, resultState){
+    return resultState.join() === beforResultState.join()
 }
 
 function win(){
@@ -179,17 +164,17 @@ function win(){
 }
 
 function disableElement(state){
-    let btn = document.getElementsByClassName('btn'); 
-    btn = $(btn);  
-    let content = document.getElementsByClassName('content'); 
+    let btn = document.getElementsByClassName('btn');
+    btn = $(btn);
+    let content = document.getElementsByClassName('content');
     content = $(content);
     switch(state){
         case 'disabled':
             btn.addClass('disabled');
             content.addClass('disabled');
         break;
-        
-        case 'enabled':
+
+        case 'active':
         default:
             btn.removeClass('disabled');
             content.removeClass('disabled');
@@ -198,9 +183,11 @@ function disableElement(state){
 }
 
 export function clearScene(){
+    document.stopReaction = true;
     $('.hint').removeClass('visible');
+    disableElement('active')
     let arrPoint = document.getElementsByClassName('point');
-    for(let i = 0; i < arrPoint.length; i++){   
+    for(let i = 0; i < arrPoint.length; i++){
         pointState($(arrPoint[i]), "dead");
     }
 }
@@ -208,5 +195,8 @@ export function clearScene(){
 function pointState(point, state){
     point.attr('state', state);
     point.attr('class', `point ${point.attr('state')}`)
+}
 
+function getStatusWork() {
+    return status;
 }
